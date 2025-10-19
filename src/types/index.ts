@@ -4,7 +4,6 @@ export type SocialPlatform =
 	| 'Threads'
 	| 'Website'
 	| 'Twitch'
-	| 'TikTok'
 	| 'Twitter'
 	| 'YouTube'
 	| 'LinkedIn';
@@ -33,6 +32,15 @@ export interface Profile {
 	displayName: string;
 	bio: string;
 	avatar: string;
+	coverImage?: string;
+	tags?: string[];
 	links: SocialLink[];
 	theme: ProfileTheme;
+}
+
+export interface ProjectMeta {
+	name: string;
+	description: string;
+	githubUrl: string;
+	tags: string[];
 }

@@ -6,15 +6,7 @@
 	"printWidth": 120,
 	"bracketSameLine": true,
 	"plugins": ["@trivago/prettier-plugin-sort-imports"],
-	"importOrder": [
-		"^react$",
-		"^next",
-		"^@/lib/(.*)$",
-		"^@/components/(.*)$",
-		"^@/types/(.*)$",
-		"^@/(.*)$",
-		"^[./]"
-	],
+	"importOrder": ["^react$", "^next", "^@/lib/(.*)$", "^@/components/(.*)$", "^@/types/(.*)$", "^@/(.*)$", "^[./]"],
 	"importOrderSeparation": true,
 	"importOrderSortSpecifiers": true
 }

@@ -2,14 +2,14 @@
 
 import { Icon } from '@phosphor-icons/react';
 import {
-	Browser,
-	GithubLogo,
-	InstagramLogo,
-	ThreadsLogo,
-	TiktokLogo,
-	TwitchLogo,
-	XLogo,
+	BrowserIcon,
+	GithubLogoIcon,
+	InstagramLogoIcon,
+	ThreadsLogoIcon,
+	TwitchLogoIcon,
+	XLogoIcon,
 } from '@phosphor-icons/react/dist/ssr';
+import { ArrowUpRightIcon } from '@phosphor-icons/react/dist/ssr';
 
 import { useEffect, useState } from 'react';
 
@@ -34,15 +34,14 @@ interface LinkListProps {
 }
 
 const iconMap: Record<SocialPlatform, Icon> = {
-	Instagram: InstagramLogo,
-	Github: GithubLogo,
-	Threads: ThreadsLogo,
-	Website: Browser,
-	Twitter: XLogo,
-	Twitch: TwitchLogo,
-	TikTok: TiktokLogo,
-	YouTube: Browser,
-	LinkedIn: Browser,
+	Instagram: InstagramLogoIcon,
+	Github: GithubLogoIcon,
+	Threads: ThreadsLogoIcon,
+	Website: BrowserIcon,
+	Twitter: XLogoIcon,
+	Twitch: TwitchLogoIcon,
+	YouTube: BrowserIcon,
+	LinkedIn: BrowserIcon,
 };
 
 export default function LinkList({
@@ -94,41 +93,55 @@ export default function LinkList({
 		<div className="space-y-4 w-full">
 			{links.map((link, index) => {
 				const IconComponent = iconMap[link.icon as SocialPlatform] || null;
+				const iconBg = hexToRgba(currentColors.textColor || '#ffffff', 0.08);
 
 				return (
-					<a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="block w-full">
+					<a
+						key={index}
+						href={link.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="block w-full group focus:outline-none">
 						<Card
-							className="w-full hover:scale-105 transition-transform duration-200 ease-in-out"
+							className="w-full overflow-hidden rounded-2xl border transition-all duration-200 ease-in-out group-hover:translate-y-[-2px] group-hover:shadow-lg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 							style={{
 								borderColor: currentColors.borderColor,
 								backgroundColor: currentColors.secondaryColor,
 							}}>
-							<CardHeader>
-								<div className="flex items-center space-x-2">
-									{IconComponent && (
-										<div className="flex items-center justify-center w-6 h-6">
-											<IconComponent
-												style={{
-													color: currentColors.textColor,
-												}}
-												size={20}
-												weight="regular"
-											/>
+							<CardHeader className="relative">
+								<div className="flex items-center justify-between gap-4">
+									<div className="flex items-center gap-3">
+										{IconComponent && (
+											<div
+												className="flex items-center justify-center w-9 h-9 rounded-full"
+												style={{ backgroundColor: iconBg }}>
+												<IconComponent
+													style={{ color: currentColors.textColor }}
+													size={20}
+													weight="regular"
+												/>
+											</div>
+										)}
+										<div>
+											<CardTitle style={{ color: currentColors.textColor }} className="leading-6">
+												{link.title}
+											</CardTitle>
+											<CardDescription
+												style={{ color: hexToRgba(currentColors.textColor || '#ffffff', 0.7) }}
+												className="line-clamp-1">
+												{link.description}
+											</CardDescription>
 										</div>
-									)}
-									<CardTitle
-										style={{
-											color: currentColors.textColor,
-										}}>
-										{link.title}
-									</CardTitle>
+									</div>
+									<div className="shrink-0">
+										<ArrowUpRightIcon
+											size={18}
+											weight="bold"
+											style={{ color: hexToRgba(currentColors.textColor || '#ffffff', 0.6) }}
+											className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+										/>
+									</div>
 								</div>
-								<CardDescription
-									style={{
-										color: hexToRgba(currentColors.textColor || '#ffffff', 0.7),
-									}}>
-									{link.description}
-								</CardDescription>
 							</CardHeader>
 						</Card>
 					</a>

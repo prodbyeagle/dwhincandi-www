@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: 'EagleLink',
-	description: 'All your important links in one beautiful, customizable page',
+	title: '@dwhincandi',
+	icons: 'https://cdn.discordapp.com/avatars/893792975761584139/21e7ccd8813485529427ad0e87ac6e89.webp?size=1024',
 };
 
 export default function RootLayout({

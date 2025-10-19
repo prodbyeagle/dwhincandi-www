@@ -10,6 +10,25 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+	async redirects() {
+		return [
+			{
+				source: '/github',
+				destination: 'https://github.com/dwhincandi',
+				permanent: true,
+			},
+			{
+				source: '/instagram',
+				destination: 'https://instagram.com/dwhincandi',
+				permanent: true,
+			},
+			{
+				source: '/twitch',
+				destination: 'https://twitch.tv/dwhincandi',
+				permanent: true,
+			},
+		];
+	},
 };
 
 export default nextConfig;

@@ -1,35 +1,52 @@
+import { FolderGit2 } from 'lucide-react';
+
 import Link from 'next/link';
 
-import { getUsernames } from '@/lib/user-service';
+import { cn } from '@/lib/utils';
 
+import LinkList from '@/components/link-list';
+import { ProfileHeader } from '@/components/profile/profile-header';
+import { SiteFooter } from '@/components/site-footer';
+import ThemeAwareProfile from '@/components/theme-aware-profile';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Button } from '@/components/ui/button';
 
-export default async function HomePage() {
-	const usernames = await getUsernames();
+import { userProfile } from '@/data/profile';
+
+export default function HomePage() {
+	const userData = userProfile;
 
 	return (
-		<div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background text-foreground">
-			<div className="absolute top-4 right-4">
+		<ThemeAwareProfile userData={userData}>
+			<div className="absolute top-4 right-4 z-10">
 				<ThemeToggle />
 			</div>
 
-			<div className="max-w-2xl w-full text-center">
-				<h1 className="text-5xl font-bold mb-12">EagleLink</h1>
+			<section className={cn('w-full max-w-lg mx-auto px-4', 'flex flex-col gap-8')}>
+				<ProfileHeader userData={userData} />
 
-				{usernames.length > 0 && (
-					<div className="mb-8">
-						<h2 className="text-xl font-semibold mb-4">All Users</h2>
-						<div className="flex flex-wrap justify-center gap-2">
-							{usernames.map((username) => (
-								<Button key={username} variant="outline" asChild>
-									<Link href={`/${username}`}>@{username}</Link>
-								</Button>
-							))}
-						</div>
-					</div>
-				)}
-			</div>
-		</div>
+				<div className="flex justify-center">
+					<Link
+						href="/projects"
+						className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground underline underline-offset-4">
+						<FolderGit2 className="h-4 w-4" />
+						View Projects
+					</Link>
+				</div>
+
+				<LinkList
+					links={userData.links}
+					textColor={userData.theme.light.text}
+					secondaryColor={userData.theme.light.secondary}
+					backgroundColor={userData.theme.light.background}
+					accentColor={userData.theme.light.accent}
+					darkTextColor={userData.theme.dark.text}
+					darkSecondaryColor={userData.theme.dark.secondary}
+					darkBackgroundColor={userData.theme.dark.background}
+					darkAccentColor={userData.theme.dark.accent}
+				/>
+			</section>
+
+			<SiteFooter />
+		</ThemeAwareProfile>
 	);
 }

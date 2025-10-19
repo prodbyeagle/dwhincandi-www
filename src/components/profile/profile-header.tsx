@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import type { Profile } from '@/types';
 
-export function ProfileHeaderB({ userData }: { userData: Profile }) {
+export function ProfileHeader({ userData }: { userData: Profile }) {
 	const { theme } = useTheme();
 	const isDark = theme === 'dark';
 	const accent = isDark ? userData.theme.dark.accent : userData.theme.light.accent;
@@ -60,7 +60,7 @@ export function ProfileHeaderB({ userData }: { userData: Profile }) {
 					</Avatar>
 				</div>
 				<h1 className="mt-3 text-2xl font-semibold tracking-tight" style={{ color: text }}>
-					{userData.displayName}
+					{userData.displayName} ( @{userData.displayName.toLowerCase()} )
 				</h1>
 				<p className="max-w-md text-center text-sm text-muted-foreground line-clamp-2">{userData.bio}</p>
 				{userData.tags && userData.tags.length > 0 && (

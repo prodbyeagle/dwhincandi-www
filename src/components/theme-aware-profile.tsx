@@ -4,6 +4,8 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { useTheme } from 'next-themes';
 
+import { hexToRgba } from '@/lib/utils';
+
 import type { Profile } from '@/types';
 
 interface ThemeAwareProfileProps {
@@ -58,11 +60,17 @@ export default function ThemeAwareProfile({ userData, children }: ThemeAwareProf
 		);
 	}
 
+	const useProfileGradient = theme === 'light' || theme === 'dark' || theme === undefined;
+	const gradient = useProfileGradient
+		? `radial-gradient(600px circle at 10% 10%, ${hexToRgba(themeColors.accentColor, 0.18)}, transparent 45%), radial-gradient(600px circle at 90% 90%, ${hexToRgba(themeColors.accentColor, 0.12)}, transparent 45%)`
+		: undefined;
+
 	return (
 		<div
 			className="min-h-screen flex flex-col items-center py-8 px-4 relative transition-colors duration-300"
 			style={{
 				backgroundColor: themeColors.backgroundColor,
+				backgroundImage: gradient,
 				borderColor: themeColors.secondaryColor,
 				color: themeColors.textColor,
 			}}>
