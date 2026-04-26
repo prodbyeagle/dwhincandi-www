@@ -1,25 +1,18 @@
-import type React from 'react';
-
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from 'next-themes';
+import { Inter } from 'next/font/google';
 
 import './globals.css';
 
-const geistSans = Geist({
-	variable: '--font-geist-sans',
+const inter = Inter({
+	variable: '--font-inter',
 	subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
-	subsets: ['latin'],
+	display: 'swap',
 });
 
 export const metadata: Metadata = {
-	title: '@dwhincandi',
-	icons: 'https://cdn.discordapp.com/avatars/893792975761584139/21e7ccd8813485529427ad0e87ac6e89.webp?size=1024',
+	title: 'Andi',
+	description: 'Links',
 };
 
 export default function RootLayout({
@@ -28,9 +21,12 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<body className={`${geistSans.className} ${geistMono.variable} antialiased`}>
-				<ThemeProvider>{children}</ThemeProvider>
+		<html lang='en' suppressHydrationWarning>
+			<body
+				className={`${inter.variable} antialiased font-sans`}>
+				<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);
